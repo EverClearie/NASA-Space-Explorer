@@ -1,10 +1,21 @@
 {
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    },
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/common-utils:1": {}
+  },
+
   "customizations": {
     "vscode": {
       "extensions": [
         "GitHub.copilot",
-        "ms-vscode.live-server"
+        "ms-vscode.live-server",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
       ],
       "settings": {
         "livePreview.autoRefreshPreview": "On All Changes in Editor",
@@ -14,9 +25,18 @@
         "editor.insertSpaces": true,
         "editor.detectIndentation": false,
         "editor.wordWrap": "on",
-        "editor.stickyScroll.enabled": false
+        "editor.stickyScroll.enabled": false,
+        "editor.formatOnSave": true,
+        "files.autoSave": "afterDelay"
       }
     }
-  }
+  },
+
+  "forwardPorts": [5500],
+
+  "postCreateCommand": "npm install",
+
+  "remoteUser": "vscode"
 }
+
 

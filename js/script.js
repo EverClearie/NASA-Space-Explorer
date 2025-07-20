@@ -1,17 +1,25 @@
-// Find our date picker inputs on the page
 const startInput = document.getElementById('startDate');
 const endInput = document.getElementById('endDate');
-
-// Call the setupDateInputs function from dateRange.js
-// This sets up the date pickers to:
-// - Default to a range of 9 days (from 9 days ago to today)
-// - Restrict dates to NASA's image archive (starting from 1995)
 setupDateInputs(startInput, endInput);
-// NASA API key
-const API_KEY = 'Ub3gj6lENSgT8HZZG2D9r24VRwPQujvrWQdzPLik'; // 
 
+const API_KEY = 'Ub3gj6lENSgT8HZZG2D9r24VRwPQujvrWQdzPLik';
 const button = document.querySelector('button');
-const gallery = document.querySelector('.gallery');
+const gallery = document.getElementById('gallery');
+
+// Add a random "Did You Know?" fact on load
+const facts = [
+  "Did you know? A day on Venus is longer than a year on Venus.",
+  "Did you know? Neutron stars can spin 600 times per second.",
+  "Did you know? One spoonful of a neutron star weighs about 6 billion tons.",
+  "Did you know? The Sun accounts for 99.86% of the mass in our solar system.",
+  "Did you know? Space is completely silent—no air, no sound.",
+  "Did you know? Saturn’s rings are made of billions of pieces of ice and rock."
+];
+const fact = facts[Math.floor(Math.random() * facts.length)];
+const factBox = document.createElement('div');
+factBox.className = 'fact-box';
+factBox.textContent = fact;
+document.querySelector('.container').insertBefore(factBox, gallery);
 
 button.addEventListener('click', async () => {
   const startDate = startInput.value;
@@ -29,29 +37,59 @@ button.addEventListener('click', async () => {
   try {
     const response = await fetch(apiURL);
     const data = await response.json();
-
-    gallery.innerHTML = ''; // Clear previous content
+    gallery.innerHTML = ''; // Clear loading
 
     data.forEach(item => {
       const card = document.createElement('div');
       card.classList.add('gallery-item');
 
+      // Hover zoom effect (CSS will handle)
+      let content = '';
+
       if (item.media_type === 'image') {
-        card.innerHTML = `
-          <img src="${item.url}" alt="${item.title}">
+        content = `
+          <img src="${item.url}" alt="${item.title}" class="zoomable" />
           <p><strong>${item.title}</strong> (${item.date})</p>
-          <p>${item.explanation}</p>
         `;
+
+        card.addEventListener('click', () => {
+          openModal(item);
+        });
+
       } else if (item.media_type === 'video') {
-        card.innerHTML = `
+        content = `
           <p><strong>${item.title}</strong> (${item.date})</p>
-          <a href="${item.url}" target="_blank">Watch Video</a>
+          <a href="${item.url}" target="_blank">📺 Watch Video</a>
         `;
       }
 
+      card.innerHTML = content;
       gallery.appendChild(card);
     });
+
   } catch (error) {
     gallery.innerHTML = `<p class="placeholder">Something went wrong: ${error.message}</p>`;
   }
 });
+
+function openModal(item) {
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+
+  modal.innerHTML = `
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="${item.hdurl || item.url}" alt="${item.title}" />
+      <h2>${item.title}</h2>
+      <p><em>${item.date}</em></p>
+      <p>${item.explanation}</p>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.querySelector('.close').onclick = () => modal.remove();
+  modal.onclick = e => {
+    if (e.target === modal) modal.remove();
+  };
+}
