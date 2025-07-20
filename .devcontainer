@@ -15,7 +15,8 @@
         "GitHub.copilot",
         "ms-vscode.live-server",
         "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint"
+        "dbaeumer.vscode-eslint",
+        "editorconfig.editorconfig"           
       ],
       "settings": {
         "livePreview.autoRefreshPreview": "On All Changes in Editor",
@@ -27,7 +28,9 @@
         "editor.wordWrap": "on",
         "editor.stickyScroll.enabled": false,
         "editor.formatOnSave": true,
-        "files.autoSave": "afterDelay"
+        "files.autoSave": "afterDelay",
+        "prettier.singleQuote": true,
+        "prettier.trailingComma": "es5"
       }
     }
   },
@@ -38,5 +41,3 @@
 
   "remoteUser": "vscode"
 }
-
-

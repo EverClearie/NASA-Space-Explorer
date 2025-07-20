@@ -4,60 +4,36 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NASA Space Explorer</title>
-
-  <!-- NASA-like brand fonts (Inter or Source Sans Pro) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- Stylesheet -->
   <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
   <div class="container">
-    <!-- Header with NASA branding -->
     <header class="site-header">
-      <img src="img/nasa-worm-logo.png" alt="NASA Logo" class="logo" />
-      <h1>NASA Space Explorer</h1>
+      <div class="logo-title">
+        <img src="img/nasa-worm-logo.png" alt="NASA Logo" class="logo" />
+        <h1>NASA Space Explorer</h1>
+      </div>
     </header>
 
-    <!-- Random Space Fact (Level Up!) -->
-    <section id="spaceFact" aria-live="polite" class="space-fact-box">
-      <h2 class="visually-hidden">Space Term of the Day</h2>
-      <p><strong>Did You Know?</strong> <span id="randomFact">Loading a cool space fact...</span></p>
-    </section>
+    <!-- Random Space Fact -->
+    <p id="fact" class="random-fact">Did You Know? Loading a cool space fact...</p>
 
-    <!-- Filters -->
-    <div class="filters" role="form" aria-label="Date filter form">
-      <input type="date" id="startDate" aria-label="Start date" />
-      <input type="date" id="endDate" aria-label="End date" />
-      <button id="fetchBtn" aria-label="Get space images">Get Space Images</button>
+    <!-- Date Range Inputs -->
+    <div class="filters">
+      <input type="date" id="startDate" />
+      <input type="date" id="endDate" />
+      <button>Get Space Images</button>
     </div>
 
-    <!-- Loading message -->
-    <div id="loadingMessage" class="visually-hidden" role="status" aria-live="polite">
-      Loading images from space...
-    </div>
-
-    <!-- Gallery area -->
+    <!-- Gallery Container -->
     <div id="gallery" class="gallery">
       <div class="placeholder">
-        <div class="placeholder-icon" aria-hidden="true">🔭</div>
+        <div class="placeholder-icon">🔭</div>
         <p>Select a date range and click "Get Space Images" to explore the cosmos!</p>
       </div>
     </div>
   </div>
 
-  <!-- Modal (Bonus Requirement) -->
-  <div id="modal" class="modal visually-hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-content">
-      <button id="closeModal" aria-label="Close modal">&times;</button>
-      <img id="modalImage" alt="" />
-      <h2 id="modalTitle"></h2>
-      <p id="modalDate"></p>
-      <p id="modalExplanation"></p>
-    </div>
-  </div>
-
-  <!-- Scripts -->
   <script src="js/dateRange.js"></script>
   <script src="js/script.js"></script>
 </body>

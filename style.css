@@ -42,23 +42,32 @@ a, button, input {
   border: 0;
 }
 
-/* Centered container */
+/* Container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Header */
+/* Header layout */
 .site-header {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   padding: 20px 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
 }
 
+/* Header text */
 h1 {
   font-family: Verdana, sans-serif;
   font-weight: bold;
@@ -70,10 +79,18 @@ h1 {
 /* Logo */
 .logo {
   width: 140px;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
-/* Date-picker & button row */
+/* Space Fact */
+#fact {
+  text-align: center;
+  font-style: italic;
+  font-size: 1rem;
+  padding-bottom: 15px;
+}
+
+/* Filters */
 .filters {
   display: flex;
   flex-direction: column;
@@ -117,7 +134,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Stack horizontally on wider screens */
+/* Layout for larger screens */
 @media (min-width: 600px) {
   .filters {
     flex-direction: row;
@@ -152,13 +169,14 @@ button:disabled {
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease;
+  animation: fadeIn 0.6s ease-in;
 }
 
 .gallery-item:hover {
   transform: translateY(-5px);
 }
 
-/* Three columns on wide screens */
+/* 3 columns on wide screens */
 @media (min-width: 1000px) {
   .gallery-item {
     flex: 0 1 31%;
@@ -191,12 +209,6 @@ button:disabled {
   margin-bottom: 20px;
 }
 
-/* Animations (for Level Up!) */
+/* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.gallery-item {
-  animation: fadeIn 0.6s ease-in;
-}
+  from { opacity
